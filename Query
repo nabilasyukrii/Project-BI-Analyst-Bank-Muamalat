@@ -1,0 +1,17 @@
+SELECT 
+  `bankmuamalat.orders`. Date as order_date,
+  `bankmuamalat.productcategory`. categoryName as category_name,
+  `bankmuamalat.Customers`. CustomerCity as City_Cust,
+  `bankmuamalat.Customers`.CustomerEmail as Email_cust,
+  `bankmuamalat.orders`. Quantity as order_qty,
+  `bankmuamalat.products`. ProdName as product_name,
+  `bankmuamalat.products`. Price as product_price,
+  (`bankmuamalat.orders`. Quantity*`bankmuamalat.products`. Price) as total_sales
+   FROM `bankmuamalat.Customers`
+INNER JOIN
+  `bankmuamalat.orders` ON `bankmuamalat.Customers`. CustomerID = `bankmuamalat.orders`. CustomerID
+INNER JOIN
+  `bankmuamalat.products` ON `bankmuamalat.orders`. ProdNumber = `bankmuamalat.products`. ProdNumber
+INNER JOIN
+  `bankmuamalat.productcategory` ON `bankmuamalat.products`. Category = `bankmuamalat.productcategory`. CategoryID
+ORDER BY order_date;
